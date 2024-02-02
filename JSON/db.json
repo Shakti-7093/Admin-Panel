@@ -1,0 +1,15 @@
+{
+    "user-login": [
+        {
+            "id": 1,
+            "name": "admin",
+            "username": "admin",
+            "email": "admin@gmail.com",
+            "password": "admin",
+            "role": "admin",
+            "createdAt": "2020-01-01T00:00:00.000Z"
+        }
+    ],
+    "user-data": [],
+    "products": []
+}
