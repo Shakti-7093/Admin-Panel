@@ -1,4 +1,5 @@
 import Sidebar from "./Sidebar"
+import Users from "./Users"
 
 
 function Home() {
@@ -7,6 +8,7 @@ function Home() {
       <Sidebar />
       <div className="container">
         <h1>Home Page</h1>
+        <Users />
       </div>
     </>
   )

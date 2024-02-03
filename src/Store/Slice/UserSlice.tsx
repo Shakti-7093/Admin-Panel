@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import initialState, { UserInterface } from '../Interface/UserInterface';
 
-const fetchUser = createAsyncThunk<UserInterface[]>('user/fetchUser', async () => {
+export const fetchUser = createAsyncThunk<UserInterface[]>('user/fetchUser', async () => {
     const response = await axios.get<UserInterface[]>('https://jsonplaceholder.typicode.com/users');
     return response.data;
 });
