@@ -2,6 +2,8 @@ export interface ClientInterface {
     id: number,
     name: string,
     email: string,
+    phone: string,
+    website: string,
     address: {
         street: string,
         area: string,
@@ -9,9 +11,7 @@ export interface ClientInterface {
         state: string,
         country: string,
         zipcode: string
-    },
-    phone: string,
-    website: string
+    }
 }
 
 interface ClientState {

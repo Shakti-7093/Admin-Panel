@@ -39,17 +39,18 @@ const Products: React.FC = () => {
             <div className='container'>
                 <div className="search-flex">
                     <TextField
+                        className='search'
                         variant="outlined"
                         placeholder="Search..."
                         onChange={(e) => {
                             e.preventDefault()
                             setSearchTerm(e.target.value)
                         }}
-                        style={{
-                            marginTop: '-10px',
-                            marginLeft: '-1%',
-                            width: '40%'
-                        }}
+                        // style={{
+                        //     marginTop: '-10px',
+                        //     marginLeft: '-1%',
+                        //     width: '40%'
+                        // }}
                         InputProps={{
                             endAdornment: (
                                 <InputAdornment position="start">
@@ -60,13 +61,13 @@ const Products: React.FC = () => {
                             ),
                         }}
                     />
-                    <IconButton onClick={handleOpenDialog} color='primary' style={{ marginLeft: '500px', marginTop: '-10px' }}>
-                        <Button variant="contained" color="primary">
+                    <IconButton className='add-button' onClick={handleOpenDialog} color='primary'>
+                        <Button className='add-button' variant="contained" color="primary">
                             Add Product
                         </Button>
                     </IconButton>
                 </div>
-                <ProductFormDialog open={dialogOpen} onClose={handleCloseDialog} />
+                <ProductFormDialog open={dialogOpen} onClose={handleCloseDialog} client={[]} />
                 <TableContainer component={Paper} style={{ boxShadow: '0px 0px 8px 0px gray', borderRadius: '10px', marginTop: '20px' }}>
                     <Table>
                         <TableHead>

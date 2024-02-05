@@ -336,16 +336,30 @@
       "id": "1",
       "name": "Shakti",
       "email": "webkit7093@gmail.com",
+      "phone": "8866467093",
+      "website": "example.com",
       "address": {
-        "street": "25 s",
+        "street": "25",
         "area": "Bopal",
         "city": "Ahmedabad",
         "state": "Gujarat",
         "country": "india",
         "zipcode": "2350"
-      },
-      "phone": "8866467093",
-      "website": "example.com"
+      }
+    },
+    {
+      "id": "0872",
+      "name": "Shakti Singh Chundawat",
+      "email": "shaktisinghchundawat7093@gmail.com",
+      "phone": "8758063367",
+      "website": "daddeveloper.online",
+      "address": {
+        "street": "S-2 Devdeep-2 opp. Dev 181, Sterling City",
+        "city": "Ahmedabad",
+        "state": "Gujarat",
+        "country": "India",
+        "zipcode": "380058"
+      }
     }
   ]
 }

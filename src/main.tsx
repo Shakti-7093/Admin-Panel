@@ -7,11 +7,11 @@ import Store from './Store/Store.tsx'
 import { UserProvider } from './Context/Context.tsx'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <Provider store={Store}>
-    <UserProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </UserProvider>
-  </Provider>,
+    <Provider store={Store}>
+      <UserProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </UserProvider>
+    </Provider>,
 );

@@ -1,13 +1,24 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { auth, provider } from "./config";
 import { signInWithPopup } from "firebase/auth";
 import { useState } from "react";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import "./Sigin.css";
 import { Outlet } from "react-router-dom";
-import avatar from "../assets/456322.webp";
+import avatar from '../assets/456322.webp'
+
+const Alert = React.forwardRef<HTMLDivElement, AlertProps>((props, ref) => (
+  <MuiAlert elevation={6} variant="filled" {...props} ref={ref} />
+));
 
 function Login() {
   const [email, setEmail] = useState<string | null>(null);
+  const [open, setOpen] = useState(false);
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const handleSignInGoogle = () => {
     signInWithPopup(auth, provider)
@@ -19,14 +30,21 @@ function Login() {
       })
       .catch((error) => {
         console.error("Google Sign-In Error", error);
+      })
+      .finally(() => {
+        if (email && email !== "webkit7093@gmail.com") {
+          setOpen(true);
+        }
       });
   };
 
   useEffect(() => {
-    setEmail(localStorage.getItem("email") || null);
+    const userEmail = localStorage.getItem("email");
+    setEmail(userEmail);
   }, []);
 
-  if (email) {
+
+  if (email === "webkit7093@gmail.com") {
     return <Outlet />;
   } else {
     return (
@@ -43,6 +61,11 @@ function Login() {
             </div>
           </div>
         </div>
+        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+          <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
+            Invalid email! Only Admin can access the dashboard.
+          </Alert>
+        </Snackbar>
       </div>
     );
   }
