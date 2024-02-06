@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { Button, Dialog, DialogTitle, DialogContent, DialogActions, TextField, Select, MenuItem, InputLabel, FormControl } from '@mui/material';
+import { Button, Dialog, DialogTitle, DialogContent, DialogActions, TextField, Select, MenuItem, InputLabel, FormControl, Alert } from '@mui/material';
 import { addProduct, updateProduct } from '../Store/functions/Product';
 import { ProductInterface } from '../Store/Interface/ProductInterface';
 import { AppDispatch } from '../Store/Store';
@@ -11,8 +11,12 @@ interface ProductFormDialogProps {
   product: ProductInterface | null;
 }
 
+function error() {
+  return <Alert severity="error">Please fill all the fields</Alert>;
+}
+
 const ProductsFormDialog: React.FC<ProductFormDialogProps> = ({ open, onClose, product }) => {
-  
+
   const dispatch = useDispatch<AppDispatch>();
   const [editingProduct, setEditingProduct] = useState<ProductInterface | null>(product);
   const [newProduct, setNewProduct] = useState<ProductInterface | null>(null);

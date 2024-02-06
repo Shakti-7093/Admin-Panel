@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, TextField, Dialog, TableContainer, Table, TableHead, TableRow, TableCell, IconButton, TableBody, Paper } from "@mui/material";
+import { Button, TextField, Dialog, TableContainer, Table, TableHead, TableRow, TableCell, IconButton, TableBody, Paper, Collapse, Typography } from "@mui/material";
 import { fetchClient, addClient, updateClient, deleteClient } from "../Store/functions/Client";
 import { AppDispatch, RootState } from "../Store/Store";
 import { ClientInterface } from "../Store/Interface/ClientInterface";
@@ -10,10 +10,11 @@ import { KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
 const Client: React.FC = () => {
     const dispatch = useDispatch<AppDispatch>();
     const clients = useSelector((state: RootState) => state.client.clients);
-    const [open, setOpen] = useState(false);
-    const [openTable, setOpenTable] = useState(false);
-
-    const [newClient, setNewClient] = useState({
+    // const [open, setOpen] = useState(false);
+    const [expandedClientId, setExpandedClientId] = useState<number | null>(null);
+    const [dialogOpen, setDialogOpen] = useState<boolean>(false);
+    const [newClient, setNewClient] = useState<ClientInterface>({
+        id: 0,
         name: "",
         email: "",
         phone: "",
@@ -27,8 +28,6 @@ const Client: React.FC = () => {
             zipcode: "",
         },
     });
-
-    const [selectedClient, setSelectedClient] = useState<ClientInterface | null>(null);
 
     useEffect(() => {
         dispatch(fetchClient());
@@ -54,6 +53,7 @@ const Client: React.FC = () => {
     const handleAddClient = () => {
         dispatch(addClient(newClient));
         setNewClient({
+            id: 0,
             name: "",
             email: "",
             phone: "",
@@ -67,29 +67,27 @@ const Client: React.FC = () => {
                 zipcode: "",
             },
         });
-        setOpen(false);
-    };
+        setDialogOpen(false);
+    };    
 
     const handleUpdateClient = () => {
-        if (selectedClient) {
-            dispatch(updateClient({ ...selectedClient, ...newClient }));
-            setSelectedClient(null);
-            setNewClient({
-                name: "",
-                email: "",
-                phone: "",
-                website: "",
-                address: {
-                    street: "",
-                    area: "",
-                    city: "",
-                    state: "",
-                    country: "",
-                    zipcode: "",
-                },
-            });
-            setOpen(false);
-        }
+        dispatch(updateClient(newClient));
+        setNewClient({
+            id: 0,
+            name: "",
+            email: "",
+            phone: "",
+            website: "",
+            address: {
+                street: "",
+                area: "",
+                city: "",
+                state: "",
+                country: "",
+                zipcode: "",
+            },
+        });
+        setDialogOpen(false);
     };
 
     const handleDeleteClient = (clientId: number) => {
@@ -97,14 +95,13 @@ const Client: React.FC = () => {
     };
 
     const handleEditClick = (client: ClientInterface) => {
-        setOpen(true)
-        setSelectedClient(client);
-        setNewClient({ ...client });
+        setNewClient(client);
+        setDialogOpen(true);
     };
 
     const handleCancelEdit = () => {
-        setSelectedClient(null);
         setNewClient({
+            id: 0,
             name: "",
             email: "",
             phone: "",
@@ -118,7 +115,15 @@ const Client: React.FC = () => {
                 zipcode: "",
             },
         });
-        setOpen(false);
+        setDialogOpen(false);
+    };
+
+    const toggleClientDetails = (clientId: number) => {
+        if (expandedClientId === clientId) {
+            setExpandedClientId(null);
+        } else {
+            setExpandedClientId(clientId);
+        }
     };
 
     return (
@@ -126,61 +131,69 @@ const Client: React.FC = () => {
             <Sidebar />
             <div className="container">
                 <h2>Clients</h2>
-                <Button onClick={() => setOpen(true)}>Add Client</Button>
-                <TableContainer component={Paper} style={{ boxShadow: '0px 0px 8px 0px gray', borderRadius: '10px', width: '100%' }}>
+                <Button onClick={() => setDialogOpen(true)}>Add Client</Button>
+                <TableContainer className="table" component={Paper} style={{ boxShadow: '0px 0px 8px 0px gray', borderRadius: '10px' }}>
                     <Table>
                         <TableHead>
                             <TableRow>
-                                <TableCell className='borderRight'>
-                                    <IconButton
-                                        aria-label="expand row"
-                                        size="small"
-                                        onClick={() => setOpenTable(!openTable)}
-                                    >
-                                        {openTable ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
-                                    </IconButton>
-                                </TableCell>
+                                <TableCell></TableCell>
                                 <TableCell className='borderRight'>Name</TableCell>
                                 <TableCell className='borderRight'>Email</TableCell>
                                 <TableCell className='borderRight'>Phone</TableCell>
-                                <TableCell className='borderRight'>Website</TableCell>
-                                <TableCell className='borderRight'>Address</TableCell>
-                                <TableCell className='borderRight'>Zip Code</TableCell>
-                                <TableCell className='borderRight'>Country</TableCell>
                                 <TableCell className='borderRight'>Edit</TableCell>
                                 <TableCell className='borderRight'>Delete</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {openTable && clients.map((client) => {
-                                return (
-                                    <TableRow key={client.id}>
-                                        <TableCell></TableCell>
+                            {clients.map((client) => (
+                                <React.Fragment key={client.id}>
+                                    <TableRow>
+                                        <TableCell>
+                                            <IconButton
+                                                aria-label="expand row"
+                                                size="small"
+                                                onClick={() => toggleClientDetails(client.id)}
+                                            >
+                                                {expandedClientId === client.id ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
+                                            </IconButton>
+                                        </TableCell>
                                         <TableCell className='borderRight'>{client.name}</TableCell>
                                         <TableCell className='borderRight'>{client.email}</TableCell>
                                         <TableCell className='borderRight'>{client.phone}</TableCell>
-                                        <TableCell className='borderRight'>{client.website}</TableCell>
-                                        <TableCell className='borderRight'>{client.address.street + "," + client.address.area + "," + client.address.city + "," + client.address.state}</TableCell>
-                                        <TableCell className='borderRight'>{client.address.zipcode}</TableCell>
-                                        <TableCell className='borderRight'>{client.address.country}</TableCell>
                                         <TableCell className='borderRight'>
-                                            <IconButton onClick={() => handleEditClick(client)}>
-                                                <Button>Edit</Button>
-                                            </IconButton>
+                                            <Button onClick={() => handleEditClick(client)}>Edit</Button>
                                         </TableCell>
-                                        <TableCell className='borderRight'>
-                                            <IconButton onClick={() => handleDeleteClient(client.id)}>
-                                                <Button>Delete</Button>
-                                            </IconButton>
+                                        <TableCell>
+                                            <Button onClick={() => handleDeleteClient(client.id)}>Delete</Button>
                                         </TableCell>
                                     </TableRow>
-                                )
-                            })}
+                                    <TableRow>
+                                        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={10}>
+                                            <Collapse in={expandedClientId === client.id} timeout="auto" unmountOnExit>
+                                                <Typography variant="body2" style={{ marginLeft: '20%' }}>
+                                                    <div style={{ display: 'flex', gap: '20px', marginBottom: '30px' }}>
+                                                        <h4>Website:</h4> {client.website}
+                                                    </div>
+                                                    <div style={{ display: 'flex', gap: '20px', marginBottom: '30px' }}>
+                                                        <h4>Address:</h4> {client.address.street}, {client.address.area}, {client.address.city}, {client.address.state}, {client.address.zipcode}<br />
+                                                    </div>
+                                                    <div style={{ display: 'flex', gap: '20px', marginBottom: '30px' }}>
+                                                        <h4>Zip Code:</h4> {client.address.zipcode}<br />
+                                                    </div>
+                                                    <div style={{ display: 'flex', gap: '20px', marginBottom: '30px' }}>
+                                                        <h4>Country:</h4> {client.address.country}
+                                                    </div>
+                                                </Typography>
+                                            </Collapse>
+                                        </TableCell>
+                                    </TableRow>
+                                </React.Fragment>
+                            ))}
                         </TableBody>
                     </Table>
                 </TableContainer>
-                <Dialog fullWidth open={open} onClose={() => setOpen(false)}>
-                    <h3 style={{ marginBottom: "20px", width: '50%', marginLeft: '35%' }}>{selectedClient ? "Edit Client" : "Add New Client"}</h3>
+                <Dialog fullWidth open={dialogOpen} onClose={() => setDialogOpen(false)}>
+                    <h3 style={{ marginBottom: "20px", width: '50%', marginLeft: '35%' }}>{newClient.id ? "Edit Client" : "Add New Client"}</h3>
                     <TextField
                         label="Name"
                         value={newClient.name}
@@ -241,7 +254,7 @@ const Client: React.FC = () => {
                         onChange={(e) => handleAddressChange("zipcode", e.target.value)}
                         style={{ marginBottom: "20px", width: '50%', marginLeft: '25%' }}
                     />
-                    {selectedClient ? (
+                    {newClient.id ? (
                         <div>
                             <Button onClick={handleCancelEdit} style={{ marginBottom: "20px", width: '50%', marginLeft: '25%' }}>Cancel</Button>
                             <Button onClick={handleUpdateClient} style={{ marginBottom: "20px", width: '50%', marginLeft: '25%' }}>Update</Button>

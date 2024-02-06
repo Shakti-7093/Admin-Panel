@@ -51,7 +51,7 @@
       "price": 1749,
       "discountPercentage": 31.02,
       "rating": 4.57,
-      "stock": 83,
+      "stock": "830",
       "brand": "Apple",
       "category": "laptops"
     },
@@ -371,6 +371,36 @@
         "state": "Gujarat",
         "country": "India",
         "zipcode": "380058"
+      }
+    },
+    {
+      "id": "154",
+      "name": "Harshil  Prajapati",
+      "email": "harshil12458@gmail.com",
+      "phone": "123456789",
+      "website": "last2.com",
+      "address": {
+        "street": "xxx",
+        "area": "Vasna",
+        "city": "Ahmedabad",
+        "state": "Gujarat",
+        "country": "India",
+        "zipcode": "380058"
+      }
+    },
+    {
+      "id": "1578",
+      "name": "deom",
+      "email": "demo@gmail.com",
+      "phone": "8855447755",
+      "website": "demo.com",
+      "address": {
+        "street": "12xxx",
+        "area": "xxx",
+        "city": "xxx",
+        "state": "xxx",
+        "country": "xxx",
+        "zipcode": "1245x2"
       }
     }
   ]

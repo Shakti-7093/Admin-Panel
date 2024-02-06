@@ -35,7 +35,7 @@ const Products: React.FC = () => {
     };
 
     useEffect(() => {
-        if(status === 'ideal') dispatch(fetchProduct());
+        if (status === 'ideal') dispatch(fetchProduct());
     }, [dispatch, status]);
 
     return (
