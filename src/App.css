@@ -53,8 +53,8 @@
 }
 
 .table {
-  width: 50%;
-  margin-left: 250px;
+  width: 60%;
+  margin-left: 0px;
 }
 
 @media screen and (max-width: 768px) {
