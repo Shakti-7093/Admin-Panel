@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import { Button, IconButton, InputAdornment, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from '@mui/material';
-import ProductFormDialog from './ProductsFormDialog';
-import Sidebar from './Sidebar';
 import { useDispatch, useSelector } from 'react-redux';
+import { Button, IconButton, InputAdornment, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from '@mui/material';
+import ProductsFormDialog from './ProductsFormDialog';
+import Sidebar from './Sidebar';
 import { AppDispatch, RootState } from '../Store/Store';
-import { deleteProduct, fetchProduct } from '../Store/Slice/ProductSlice';
+import { deleteProduct, fetchProduct } from '../Store/functions/Product';
 import { KeyboardArrowDown, KeyboardArrowUp, Search } from '@mui/icons-material';
 
 const Products: React.FC = () => {
-    const [dialogOpen, setDialogOpen] = useState(false);
     const dispatch = useDispatch<AppDispatch>();
     const products = useSelector((state: RootState) => state.product.products);
     const status = useSelector((state: RootState) => state.product.status);
-    const [open, setOpen] = useState(false);
+    const [dialogOpen, setDialogOpen] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
+    const [selectedProduct, setSelectedProduct] = useState<null | number>(null);
+    const [openTable, setOpenTable] = useState(false);
 
     const handleOpenDialog = () => {
         setDialogOpen(true);
@@ -21,22 +22,26 @@ const Products: React.FC = () => {
 
     const handleCloseDialog = () => {
         setDialogOpen(false);
+        setSelectedProduct(null);
     };
-
-    useEffect(() => {
-        if (status === "ideal") {
-            dispatch(fetchProduct())
-        }
-    });
 
     const handleDeleteProduct = (productId: number) => {
         dispatch(deleteProduct(productId));
     };
 
+    const handleEditProduct = (productId: number) => {
+        setSelectedProduct(productId);
+        setDialogOpen(true);
+    };
+
+    useEffect(() => {
+        if(status === 'ideal') dispatch(fetchProduct());
+    }, [dispatch, status]);
+
     return (
         <>
             <Sidebar />
-            <div className='container'>
+            <div className="container">
                 <div className="search-flex">
                     <TextField
                         className='search'
@@ -46,11 +51,6 @@ const Products: React.FC = () => {
                             e.preventDefault()
                             setSearchTerm(e.target.value)
                         }}
-                        // style={{
-                        //     marginTop: '-10px',
-                        //     marginLeft: '-1%',
-                        //     width: '40%'
-                        // }}
                         InputProps={{
                             endAdornment: (
                                 <InputAdornment position="start">
@@ -61,24 +61,22 @@ const Products: React.FC = () => {
                             ),
                         }}
                     />
-                    <IconButton className='add-button' onClick={handleOpenDialog} color='primary'>
-                        <Button className='add-button' variant="contained" color="primary">
-                            Add Product
-                        </Button>
-                    </IconButton>
+                    <Button className='add-button' variant="contained" color="primary" onClick={handleOpenDialog}>
+                        Add Product
+                    </Button>
                 </div>
-                <ProductFormDialog open={dialogOpen} onClose={handleCloseDialog} client={[]} />
+                <ProductsFormDialog open={dialogOpen} onClose={handleCloseDialog} product={selectedProduct ? products.find(p => p.id === selectedProduct) || null : null} />
                 <TableContainer component={Paper} style={{ boxShadow: '0px 0px 8px 0px gray', borderRadius: '10px', marginTop: '20px' }}>
                     <Table>
                         <TableHead>
                             <TableRow>
-                                <TableCell className='borderRight'>
+                                <TableCell>
                                     <IconButton
                                         aria-label="expand row"
                                         size="small"
-                                        onClick={() => setOpen(!open)}
+                                        onClick={() => setOpenTable(!openTable)}
                                     >
-                                        {open ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
+                                        {openTable ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
                                     </IconButton>
                                 </TableCell>
                                 <TableCell className='borderRight'>Title</TableCell>
@@ -88,11 +86,12 @@ const Products: React.FC = () => {
                                 <TableCell className='borderRight'>Price</TableCell>
                                 <TableCell className='borderRight'>Discount Percentage</TableCell>
                                 <TableCell className='borderRight'>Rating</TableCell>
+                                <TableCell className='borderRight'>Edit</TableCell>
                                 <TableCell>Delete</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {open && products.filter(
+                            {openTable && products.filter(
                                 (product) =>
                                     product.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
                                     product.brand.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -108,6 +107,11 @@ const Products: React.FC = () => {
                                         <TableCell className='borderRight'>{product.price}</TableCell>
                                         <TableCell className='borderRight'>{product.discountPercentage + "%"}</TableCell>
                                         <TableCell className='borderRight'>{product.rating}</TableCell>
+                                        <TableCell className='borderRight'>
+                                            <Button onClick={() => handleEditProduct(product.id)} color="primary">
+                                                Edit
+                                            </Button>
+                                        </TableCell>
                                         <TableCell className='borderRight'>
                                             <Button onClick={() => handleDeleteProduct(product.id)} color="secondary">
                                                 Delete

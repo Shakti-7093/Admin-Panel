@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, TextField, Dialog, TableContainer, Table, TableHead, TableRow, TableCell, IconButton, TableBody, Paper } from "@mui/material";
-import { fetchClient, addClient, updateClient, deleteClient } from "../Store/Slice/ClientSlice";
+import { fetchClient, addClient, updateClient, deleteClient } from "../Store/functions/Client";
 import { AppDispatch, RootState } from "../Store/Store";
 import { ClientInterface } from "../Store/Interface/ClientInterface";
 import Sidebar from "./Sidebar";
@@ -97,9 +97,9 @@ const Client: React.FC = () => {
     };
 
     const handleEditClick = (client: ClientInterface) => {
+        setOpen(true)
         setSelectedClient(client);
         setNewClient({ ...client });
-        setOpen(false);
     };
 
     const handleCancelEdit = () => {
@@ -212,8 +212,8 @@ const Client: React.FC = () => {
                         style={{ marginBottom: "20px", width: '50%', marginLeft: '25%' }}
                     />
                     <TextField
-                        label="Street"
-                        value={newClient.address.street}
+                        label="Area"
+                        value={newClient.address.area}
                         onChange={(e) => handleAddressChange("area", e.target.value)}
                         style={{ marginBottom: "20px", width: '50%', marginLeft: '25%' }}
                     />

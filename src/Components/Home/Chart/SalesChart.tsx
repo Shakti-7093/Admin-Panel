@@ -1,36 +1,62 @@
-import { useEffect, useState } from "react";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import axios from "axios";
+// import axios from 'axios';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+    ComposedChart,
+    Area,
+    Bar,
+    XAxis,
+    YAxis,
+    CartesianGrid,
+    Tooltip,
+    Legend,
+    ResponsiveContainer,
+} from 'recharts';
+import { fetchProduct } from '../../../Store/functions/Product';
+import { AppDispatch, RootState } from '../../../Store/Store';
+
+// const fetchData = async () => {
+//     const response = await axios.get('http://localhost:3000/products');
+//     console.log(response.data);
+//     return response.data;
+// };
+
+// const data =await fetchData();
+
 
 function SalesChart() {
-    const [data, setData] = useState([]);
+        const dispatch = useDispatch<AppDispatch>();
+        const data = useSelector((state: RootState) => state.product.products);
 
-    useEffect(() => {
-        axios.get("http://localhost:3000/products").then((res) => setData(res.data));
-    }, [])
-    return (
-        <ResponsiveContainer width="100%" height="100%">
-            <LineChart
-                width={500}
-                height={300}
-                data={data}
-                margin={{
-                    top: 5,
-                    right: 30,
-                    left: 30,
-                    bottom: 5,
-                }}
-            >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="title" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <Line type="monotone" dataKey="price" stroke="#8884d8" activeDot={{ r: 8 }} />
-                <Line type="monotone" dataKey="stock" stroke="#82ca9d" />
-            </LineChart>
-        </ResponsiveContainer>
-    )
+        useEffect(() => {
+            dispatch(fetchProduct());
+        }, [dispatch]);
+
+        return (
+            <ResponsiveContainer width="100%" height="100%">
+                <ComposedChart
+                    width={500}
+                    height={400}
+                    data={data}
+                    margin={{
+                        top: 20,
+                        right: 20,
+                        bottom: 20,
+                        left: 20,
+                    }}
+                >
+                    <CartesianGrid stroke="#f5f5f5" />
+                    <XAxis dataKey="title" scale="band" />
+                    <YAxis />
+                    <Tooltip />
+                    <Legend />
+                    <Area type="monotone" dataKey="price" fill="#8884" stroke="#8884d8" />
+                    <Bar dataKey="stock" barSize={20} fill="#8595a4" />
+                    {/* <Line type="monotone" dataKey="rating" stroke="#ff7300" />
+                    <Scatter dataKey="discountPercentage" fill="red" /> */}
+                </ComposedChart>
+            </ResponsiveContainer>
+        );
 }
 
-export default SalesChart
+export default SalesChart;

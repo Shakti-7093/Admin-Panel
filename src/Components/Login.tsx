@@ -32,7 +32,7 @@ function Login() {
         console.error("Google Sign-In Error", error);
       })
       .finally(() => {
-        if (email && email !== "webkit7093@gmail.com") {
+        if (email && email !== "webkit7093@gmail.com" && email !== "princethumar222@gmail.com") {
           setOpen(true);
         }
       });
@@ -44,7 +44,7 @@ function Login() {
   }, []);
 
 
-  if (email === "webkit7093@gmail.com") {
+  if (email === "webkit7093@gmail.com" || email === "princethumar222@gmail.com") {
     return <Outlet />;
   } else {
     return (

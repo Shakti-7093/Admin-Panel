@@ -1,26 +1,6 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-import initialState, { ClientInterface } from "../Interface/ClientInterface";
-
-export const fetchClient = createAsyncThunk<ClientInterface[]>("client/fetchClient", async () => {
-    const response = await axios.get<ClientInterface[]>("http://localhost:3000/clients");
-    return response.data;
-});
-
-export const addClient = createAsyncThunk<ClientInterface, ClientInterface>("client/addClient", async (newClient) => {
-    const response = await axios.post<ClientInterface>("http://localhost:3000/clients", newClient);
-    return response.data;
-});
-
-export const updateClient = createAsyncThunk<ClientInterface, ClientInterface>("client/updateClient", async (client) => {
-    const response = await axios.put<ClientInterface>(`http://localhost:3000/clients/${client.id}`, client);
-    return response.data;
-});
-
-export const deleteClient = createAsyncThunk<number, number>('client/deleteClient', async (productId) => {
-    await axios.delete(`http://localhost:3000/clients/${productId}`);
-    return productId;
-});
+import { createSlice } from "@reduxjs/toolkit";
+import initialState from "../Interface/ClientInterface";
+import { fetchClient, addClient, updateClient, deleteClient } from "../functions/Client";
 
 const clientSlice = createSlice({
     name: "client",

@@ -1,21 +1,6 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-import initialState, { ProductInterface } from "../Interface/ProductInterface";
-
-export const fetchProduct = createAsyncThunk<ProductInterface[]>("product/fetchProduct", async () => {
-    const response = await axios.get<ProductInterface[]>("http://localhost:3000/products");
-    return response.data;
-});
-
-export const addProduct = createAsyncThunk<ProductInterface, ProductInterface>("product/addProduct", async (newProduct) => {
-    const response = await axios.post<ProductInterface>("http://localhost:3000/products", newProduct);
-    return response.data;
-});
-
-export const deleteProduct = createAsyncThunk<number, number>('product/deleteProduct', async (productId) => {
-  await axios.delete(`http://localhost:3000/products/${productId}`);
-  return productId;
-});
+import { createSlice } from "@reduxjs/toolkit";
+import initialState from "../Interface/ProductInterface";
+import { fetchProduct, addProduct, updateProduct, deleteProduct } from "../functions/Product";
 
 const productSlice = createSlice({
     name: 'user',
@@ -49,6 +34,14 @@ const productSlice = createSlice({
             })
             .addCase(deleteProduct.rejected, (state, action) => {
                 state.status = 'failed';
+                state.error = action.error.message as string;
+            });
+            builder.addCase(updateProduct.fulfilled, (state, action) => {
+                const index = state.products.findIndex((product) => product.id === action.payload.id);
+                state.products[index] = action.payload;
+            });
+            builder.addCase(updateProduct.rejected, (state, action) => {
+                state.status = "failed";
                 state.error = action.error.message as string;
             });
     },

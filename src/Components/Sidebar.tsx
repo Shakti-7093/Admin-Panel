@@ -93,6 +93,19 @@ function Sidebar() {
   const theme = useTheme();
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
+  const [admin, setAdmin] = React.useState('')
+
+  React.useEffect(() => {
+    const email = localStorage.getItem('email');
+
+    if (email) {
+      if (email === 'webkit7093@gmail.com') {
+        setAdmin('MR. Shakti Singh');
+      } else if (email === 'princethumar222@gmail.com') {
+        setAdmin('MR. Prince Thumar');
+      }
+    }
+  }, []);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -124,8 +137,17 @@ function Sidebar() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Mini variant drawer
+          <Typography sx={{ flexGrow: 9, fontWeight: 'bold', fontSize: '25px' }} variant="h6" noWrap component="div">
+            {admin + " " + 'Panel'}
+          </Typography>
+          <Typography className='display-none' sx={{ flexGrow: 0.5 }} variant="h6" noWrap component="div">
+            <Link to='/dashboard' style={{ textDecoration: 'none', color: 'white' }}>Dashboard</Link>
+          </Typography>
+          <Typography className='display-none' sx={{ flexGrow: 0.5 }} variant="h6" noWrap component="div">
+            <Link to='/client' style={{ textDecoration: 'none', color: 'white' }}>Clients</Link>
+          </Typography>
+          <Typography className='display-none' sx={{ flexGrow: 0.5 }} variant="h6" noWrap component="div">
+            <Link to='/products' style={{ textDecoration: 'none', color: 'white' }}>Products</Link>
           </Typography>
         </Toolbar>
       </AppBar>
@@ -137,7 +159,7 @@ function Sidebar() {
         </DrawerHeader>
         <Divider />
         <List>
-          {['Dashboard', 'Profile'].map((text, index) => (
+          {['Dashboard', 'Client Data'].map((text, index) => (
             <ListItem key={text} disablePadding sx={{ display: 'block' }}>
               <ListItemButton
                 sx={{
@@ -162,7 +184,7 @@ function Sidebar() {
         </List>
         <Divider />
         <List>
-          {['Products','User Data'].map((text, index) => (
+          {['Products', 'Profile'].map((text, index) => (
             <ListItem key={text} disablePadding sx={{ display: 'block' }}>
               <ListItemButton
                 sx={{
@@ -186,27 +208,27 @@ function Sidebar() {
           ))}
         </List>
         <List>
-            <ListItem disablePadding sx={{ display: 'block' }}>
-              <ListItemButton
+          <ListItem disablePadding sx={{ display: 'block' }}>
+            <ListItemButton
+              sx={{
+                minHeight: 48,
+                justifyContent: open ? 'initial' : 'center',
+                px: 2.5,
+              }}
+            >
+              <ListItemIcon
                 sx={{
-                  minHeight: 48,
-                  justifyContent: open ? 'initial' : 'center',
-                  px: 2.5,
+                  minWidth: 0,
+                  mr: open ? 3 : 'auto',
+                  justifyContent: 'center'
                 }}
+                onClick={handleLogout}
               >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : 'auto',
-                    justifyContent: 'center'
-                  }}
-                  onClick={handleLogout}
-                >
-                  <Logout />
-                </ListItemIcon>
-                <ListItemText sx={{ opacity: open ? 1 : 0 }} />
-              </ListItemButton>
-            </ListItem>
+                <Logout />
+              </ListItemIcon>
+              <ListItemText sx={{ opacity: open ? 1 : 0 }} />
+            </ListItemButton>
+          </ListItem>
         </List>
       </Drawer>
     </Box>

@@ -1,7 +1,7 @@
 import { Grid } from "@mui/material";
 import Sidebar from "./Sidebar";
-import Users from "./Home/Users";
 import SalesChart from "./Home/Chart/SalesChart";
+import Users from "./Home/Users";
 
 function Home() {
   return (
@@ -12,7 +12,7 @@ function Home() {
           <h1>Welcome to Dashboard</h1>
           <p>Here you can see the user list and sales chart</p>
         </div>
-        <Grid container spacing={2} mt={5}>
+        <Grid container spacing={2} mt={2}>
           <Grid className="grid-border-box">
             <h1>User List</h1>
             <Users />
