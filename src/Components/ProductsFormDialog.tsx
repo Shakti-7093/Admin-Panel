@@ -11,10 +11,6 @@ interface ProductFormDialogProps {
   product: ProductInterface | null;
 }
 
-function error() {
-  return <Alert severity="error">Please fill all the fields</Alert>;
-}
-
 const ProductsFormDialog: React.FC<ProductFormDialogProps> = ({ open, onClose, product }) => {
 
   const dispatch = useDispatch<AppDispatch>();

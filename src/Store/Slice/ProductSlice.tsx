@@ -28,7 +28,6 @@ const productSlice = createSlice({
                 state.error = action.error.message as string;
             })
             .addCase(deleteProduct.fulfilled, (state, action) => {
-                // Remove the deleted product from the state
                 state.products = state.products.filter((product) => product.id !== action.payload);
                 state.status = 'success';
             })

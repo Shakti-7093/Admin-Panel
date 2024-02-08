@@ -320,7 +320,7 @@
       "category": "home-decoration"
     },
     {
-      "id": "1",
+      "id": "31",
       "title": "iPhone 11 Pro",
       "description": "An apple mobile which is nothing like apple",
       "price": "560",
@@ -348,7 +348,7 @@
       "name": "Shakti singh chundawat",
       "email": "webkit7093@gmail.com",
       "phone": "8866467093",
-      "website": "demo.com",
+      "website": "address.com",
       "address": {
         "street": "S-2 Devdeep-2 opp. Dev 181, Sterling City",
         "area": "Bopal",
@@ -362,7 +362,7 @@
       "id": "9309",
       "name": "Prince Thumar",
       "email": "princethumar222@gmail.com",
-      "phone": "9638260578",
+      "phone": "9638280576",
       "website": "prince.com",
       "address": {
         "street": "local",
@@ -371,36 +371,6 @@
         "state": "Gujarat",
         "country": "India",
         "zipcode": "380058"
-      }
-    },
-    {
-      "id": "154",
-      "name": "Harshil  Prajapati",
-      "email": "harshil12458@gmail.com",
-      "phone": "123456789",
-      "website": "last2.com",
-      "address": {
-        "street": "xxx",
-        "area": "Vasna",
-        "city": "Ahmedabad",
-        "state": "Gujarat",
-        "country": "India",
-        "zipcode": "380058"
-      }
-    },
-    {
-      "id": "1578",
-      "name": "deom",
-      "email": "demo@gmail.com",
-      "phone": "8855447755",
-      "website": "demo.com",
-      "address": {
-        "street": "12xxx",
-        "area": "xxx",
-        "city": "xxx",
-        "state": "xxx",
-        "country": "xxx",
-        "zipcode": "1245x2"
       }
     }
   ]
