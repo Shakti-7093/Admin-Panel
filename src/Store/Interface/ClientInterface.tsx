@@ -1,17 +1,20 @@
+export interface AddressInterface {
+    street: string;
+    area: string;
+    city: string;
+    state: string;
+    country: string;
+    zipcode: string;
+}
+
 export interface ClientInterface {
     id: number,
     name: string,
     email: string,
     phone: string,
     website: string,
-    address: {
-        street: string,
-        area: string,
-        city: string,
-        state: string,
-        country: string,
-        zipcode: string
-    }
+    secondemail: string,
+    address: AddressInterface
 }
 
 interface ClientState {

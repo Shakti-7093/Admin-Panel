@@ -120,15 +120,16 @@ const Clients: React.FC = () => {
                                     <TableRow>
                                         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={10}>
                                             <Collapse in={expandedClients.includes(client.id)} timeout="auto" unmountOnExit>
+                                                <h1 style={{ textAlign: 'center', borderBottom: '2px solid black' }}>Details</h1>
                                                 <Typography variant="body2" style={{ marginLeft: '20%' }}>
-                                                    <div style={{ display: 'flex', gap: '20px', marginBottom: '30px' }}>
-                                                        <h4>Website:</h4> {client.website}
+                                                    <div style={{ display: 'flex', gap: '20px', marginBottom: '20px', marginLeft: '-60px', marginTop: '10px' }}>
+                                                        <h4 style={{ fontWeight: 'bold' }}>Website:</h4> {client.website}
                                                     </div>
-                                                    <div style={{ display: 'flex', gap: '20px', marginBottom: '30px' }}>
+                                                    <div style={{ display: 'flex', gap: '20px', marginBottom: '20px', marginLeft: '-60px' }}>
                                                         <h4>Address:</h4> {client.address.street}, {client.address.area}, {client.address.city}, {client.address.state}, {client.address.zipcode}<br />
                                                     </div>
-                                                    <div style={{ display: 'flex', gap: '20px', marginBottom: '30px' }}>
-                                                        <h4>Phone:</h4> {client.phone}
+                                                    <div style={{ display: 'flex', gap: '20px', marginBottom: '20px', marginLeft: '-60px' }}>
+                                                        <h4>Country:</h4> {client.address.country}
                                                     </div>
                                                     {/* Add other details as needed */}
                                                 </Typography>

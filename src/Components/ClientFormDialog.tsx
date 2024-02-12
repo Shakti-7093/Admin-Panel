@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Button, Dialog, DialogTitle, DialogContent, DialogActions, TextField, Alert } from '@mui/material';
 import { addClient, updateClient } from '../Store/functions/Client';
-import { ClientInterface } from '../Store/Interface/ClientInterface';
+import { AddressInterface, ClientInterface } from '../Store/Interface/ClientInterface';
 import { AppDispatch } from '../Store/Store';
 
 interface ClientFormDialogProps {
@@ -25,20 +25,30 @@ const ClientFormDialog: React.FC<ClientFormDialogProps> = ({ open, onClose, clie
     }, [client]);
 
     const handleChange = (field: keyof ClientInterface, value: string) => {
-        setNewClient((prevClient) => ({
-            ...(prevClient || {}),
-            [field]: value,
-        }));
+        setNewClient((prevClient) => {
+            if (prevClient) {
+                return {
+                    ...prevClient,
+                    [field]: value,
+                };
+            }
+            return null;
+        });
     };
 
-    const handleAddressChange = (field: keyof ClientInterface, value: string) => {
-        setNewClient((prevClient) => ({
-            ...(prevClient || {}),
-            address: {
-                ...(prevClient?.address || {}),
-                [field]: value,
-            },
-        }));
+    const handleAddressChange = (field: keyof AddressInterface, value: string) => {
+        setNewClient((prevClient) => {
+            if (prevClient) {
+                return {
+                    ...prevClient,
+                    address: {
+                        ...(prevClient.address || {}),
+                        [field]: value,
+                    },
+                };
+            }
+            return null;
+        });
     };
 
     const handleAddClient = (newClient: ClientInterface) => {
@@ -64,9 +74,10 @@ const ClientFormDialog: React.FC<ClientFormDialogProps> = ({ open, onClose, clie
                 {formError && <Alert severity="error">Please fill out all the required fields</Alert>}
                 <TextField label="Name" style={{ marginTop: '5px' }} value={newClient?.name || ''} onChange={(e) => handleChange('name', e.target.value)} fullWidth required />
                 <TextField label="Email" style={{ marginTop: '10px' }} value={newClient?.email || ''} onChange={(e) => handleChange('email', e.target.value)} fullWidth required />
+                <TextField label="(optional email)" style={{ marginTop: '10px' }} value={newClient?.secondemail || ''} onChange={(e) => handleChange('secondemail', e.target.value)} fullWidth />
                 <TextField label="Phone" style={{ marginTop: '10px' }} value={newClient?.phone || ''} onChange={(e) => handleChange('phone', e.target.value)} fullWidth required />
                 <TextField label="Website" style={{ marginTop: '10px' }} value={newClient?.website || ''} onChange={(e) => handleChange('website', e.target.value)} fullWidth required />
-                <TextField label="Street" style={{ marginTop: '10px' }} value={newClient?.address?.street || ''} onChange={(e) => handleAddressChange('street', e.target.value)} fullWidth required />
+                <TextField label="Street" style={{ marginTop: '10px' }} value={newClient?.address.street || ''} onChange={(e) => handleAddressChange('street', e.target.value)} fullWidth required />
                 <TextField label="Area" style={{ marginTop: '10px' }} value={newClient?.address?.area || ''} onChange={(e) => handleAddressChange('area', e.target.value)} fullWidth required />
                 <TextField label="City" style={{ marginTop: '10px' }} value={newClient?.address?.city || ''} onChange={(e) => handleAddressChange('city', e.target.value)} fullWidth required />
                 <TextField label="State" style={{ marginTop: '10px' }} value={newClient?.address?.state || ''} onChange={(e) => handleAddressChange('state', e.target.value)} fullWidth required />
@@ -82,7 +93,7 @@ const ClientFormDialog: React.FC<ClientFormDialogProps> = ({ open, onClose, clie
                         Update Client
                     </Button>
                 ) : (
-                    <Button onClick={handleAddClient} color="primary">
+                    <Button onClick={() => { if (newClient) handleAddClient(newClient) }} color="primary">
                         Add Client
                     </Button>
                 )}

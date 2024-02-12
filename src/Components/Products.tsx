@@ -73,6 +73,7 @@ const Products: React.FC = () => {
                         Add Product
                     </Button>
                 </div>
+                {formError && <Snackbar open={formError} autoHideDuration={1}><Alert style={{ marginTop: '15px' }} variant='filled' severity='error'>Fill the Required Details</Alert></Snackbar>}
                 {deleteConformation && <Snackbar open={deleteConformation} autoHideDuration={3000}><Alert style={{ marginTop: '15px' }} variant='filled' severity="success">Deleted Product Successfully</Alert></Snackbar> || editConformation && <Snackbar open={editConformation} autoHideDuration={3000}><Alert style={{ marginTop: '15px' }} variant='filled' severity="success">Edited Product Successfully</Alert></Snackbar> || add && <Snackbar open={add} autoHideDuration={3000}><Alert style={{ marginTop: '15px' }} variant='filled' severity="success">Added Product Successfully</Alert></Snackbar>}
                 <ProductsFormDialog open={dialogOpen} onClose={handleCloseDialog} product={selectedProduct ? products.find(p => p.id === selectedProduct) || null : null} setEditConformation={setEditConformation} setAdd={setAdd} />
                 <TableContainer component={Paper} style={{ boxShadow: '0px 0px 8px 0px gray', borderRadius: '10px', marginTop: '20px' }}>

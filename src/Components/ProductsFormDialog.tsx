@@ -9,8 +9,8 @@ interface ProductFormDialogProps {
   open: boolean;
   onClose: () => void;
   product: ProductInterface | null;
-  setEditConformation: (value:boolean) => void;
-  setAdd: (value:boolean) => void;
+  setEditConformation: (value: boolean) => void;
+  setAdd: (value: boolean) => void;
 }
 
 const ProductsFormDialog: React.FC<ProductFormDialogProps> = ({ open, onClose, product, setEditConformation, setAdd }) => {
@@ -25,10 +25,15 @@ const ProductsFormDialog: React.FC<ProductFormDialogProps> = ({ open, onClose, p
   }, [product]);
 
   const handleChange = (field: keyof ProductInterface, value: string) => {
-    setNewProduct((prevProduct) => ({
-      ...(prevProduct || {}),
-      [field]: value,
-    }));
+    setNewProduct((prevProduct) => {
+      if (prevProduct) {
+        return {
+          ...prevProduct,
+          [field]: value,
+        }
+      }
+      return null
+    });
   };
 
   const handleAddProduct = () => {
@@ -38,7 +43,7 @@ const ProductsFormDialog: React.FC<ProductFormDialogProps> = ({ open, onClose, p
       setFormError(false)
       setAdd(true);
       setTimeout(() => {
-          setAdd(false);
+        setAdd(false);
       }, 3000);
     } else {
       setFormError(true);
@@ -51,7 +56,7 @@ const ProductsFormDialog: React.FC<ProductFormDialogProps> = ({ open, onClose, p
       onClose();
       setEditConformation(true);
       setTimeout(() => {
-          setEditConformation(false);
+        setEditConformation(false);
       }, 3000);
     }
   };
