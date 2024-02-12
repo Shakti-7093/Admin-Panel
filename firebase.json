@@ -1,6 +1,5 @@
 {
   "hosting": {
-    "site": "react-616",
     "public": "public",
     "ignore": [
       "firebase.json",
