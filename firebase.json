@@ -1,0 +1,11 @@
+{
+  "hosting": {
+    "site": "https://my-website-12345.web.app",
+    "public": "public",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
