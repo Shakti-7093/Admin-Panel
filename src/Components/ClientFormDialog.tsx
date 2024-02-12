@@ -10,7 +10,7 @@ interface ClientFormDialogProps {
     onClose: () => void;
     client: ClientInterface | null;
     formError: boolean;
-    setFormError: boolean;
+    setFormError: (value: boolean) => void;
 }
 
 const ClientFormDialog: React.FC<ClientFormDialogProps> = ({ open, onClose, client, formError, setFormError }) => {

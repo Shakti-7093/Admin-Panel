@@ -6,6 +6,7 @@ import Client from './Components/Client';
 import Login from './Components/Login';
 import EntryPage from './Components/EntryPage';
 import UserProfile from './Components/UserProfile';
+import Settings from './Components/Settings';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/products" element={<Products />} />
           <Route path='/client' element={<Client />} />
           <Route path='/profile' element={<UserProfile />} />
+          <Route path='/settings' element={<Settings />} />
         </Route>
       </Routes>
     </>

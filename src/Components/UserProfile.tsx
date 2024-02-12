@@ -1,53 +1,38 @@
-import { Box, Button, Card, IconButton, Typography } from '@mui/material'
 import Sidebar from './Sidebar'
-import { useUser } from '../Context/Context'
-import { useEffect, useState } from 'react';
+import { useUser } from '../Context/Context';
+import avatar from '../assets/456322.webp';
+import { Grid } from '@mui/material';
 
-function UserProfile() {
+function ProfilePage() {
 
-    const { address, setAddress } = useUser();
-    const [dialog, setDialog] = useState(false);
-    const [user, setUser] = useState('');
-
-    const email = localStorage.getItem('email');
-
-    useEffect(() => {
-        if (email === 'webkit7093@gmail.com') {
-            setUser('Shakti Singh Chundawat')
-        } else if (email === 'princethumar222@gmail.com') {
-            setUser('Prince Thumar')
-        } else {
-            setUser('User Name')
-        }
-    }, [])
+    const { image } = useUser();
+    const username = localStorage.getItem('username');
+    const address = localStorage.getItem('address');
+    const contact = localStorage.getItem('contact');
 
     return (
         <>
             <Sidebar />
             <div className='container'>
-                <Box className='user-profile'>
-                    <h1>User Profile</h1>
-                    <Card sx={{ width: 500, height: 450, border: '1px solid black' }}>
-                        <Typography variant="h5" component="div">
-                            User Name: {user}
-                        </Typography>
-                        <Typography variant="body2">
-                            Email: {email}
-                        </Typography>
-                        <Typography variant="body2">
-                            Role: Admin
-                        </Typography>
-                        <Typography variant="body2">
-                            Address: {address}
-                        </Typography>
-                        <IconButton>
-                            <Button variant='outlined' color='primary' onClick={() => setDialog(true)}>Edit</Button>
-                        </IconButton>
-                    </Card>
-                </Box>
+                <div className='setting-box'>
+                    <div className="img-box" style={{ marginTop: '-50px', marginBottom: '35px' }}>
+                        <img src={image ? URL.createObjectURL(image) : avatar} style={{ marginLeft: '25px', width: '200px', borderRadius: '50%' }} alt="" />
+                    </div>
+                    <h1>{username ? username : 'username'}</h1>
+                    <Grid style={{ display: 'grid', gridTemplateColumns: "repeat(2,1fr)", gap: '30px', marginTop: '20px', marginLeft: '300px' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column' }}>
+                            <h2>Address :</h2>
+                            <h4 style={{ marginLeft: '25px' }}>{address ? address : "User's Address"}</h4>
+                        </div>
+                        <div style={{ display: 'flex', flexDirection: 'column' }}>
+                            <h2>Contact :</h2>
+                            <h4 style={{ marginLeft: '25px' }}>{contact ? contact : "User's Contact Number"}</h4>
+                        </div>
+                    </Grid>
+                </div>
             </div>
         </>
     )
 }
 
-export default UserProfile
+export default ProfilePage;

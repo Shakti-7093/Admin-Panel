@@ -8,6 +8,7 @@ export interface ProductInterface {
     stock: number,
     brand: string,
     category: string,
+    other: string,
 }
 
 interface ProductState {

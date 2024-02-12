@@ -78,7 +78,7 @@ const Clients: React.FC = () => {
                     </Button>
                 </div>
                 <ClientFormDialog open={dialogOpen} onClose={handleCloseDialog} formError={formError} setFormError={setFormError} client={selectedClient ? clients.find(c => c.id === selectedClient) || null : null} />
-                <TableContainer component={Paper} style={{ boxShadow: '0px 0px 8px 0px gray', borderRadius: '10px', marginTop: '20px' }}>
+                <TableContainer component={Paper} style={{ boxShadow: '0px 0px 8px 0px gray', borderRadius: '10px', marginTop: '20px', display: 'flex' }}>
                     <Table>
                         <TableHead>
                             <TableRow>
@@ -86,7 +86,8 @@ const Clients: React.FC = () => {
                                 <TableCell className='borderRight'>Name</TableCell>
                                 <TableCell className='borderRight'>Email</TableCell>
                                 <TableCell className='borderRight'>Phone</TableCell>
-                                <TableCell className='borderRight'>Actions</TableCell>
+                                <TableCell className='borderRight'>Edit</TableCell>
+                                <TableCell className='borderRight'>Delete</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -109,6 +110,8 @@ const Clients: React.FC = () => {
                                             <Button onClick={() => handleEditClient(client.id)} color="primary">
                                                 Edit
                                             </Button>
+                                        </TableCell>
+                                        <TableCell className='borderRight'>
                                             <Button onClick={() => handleDeleteClient(client.id)} color="secondary">
                                                 Delete
                                             </Button>
