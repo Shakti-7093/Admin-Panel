@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "site": "https://my-website-12345.web.app",
+    "site": "react-616",
     "public": "public",
     "ignore": [
       "firebase.json",
