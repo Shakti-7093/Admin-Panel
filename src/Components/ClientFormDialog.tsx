@@ -25,15 +25,10 @@ const ClientFormDialog: React.FC<ClientFormDialogProps> = ({ open, onClose, clie
     }, [client]);
 
     const handleChange = (field: keyof ClientInterface, value: string) => {
-        setNewClient((prevClient) => {
-            if (prevClient) {
-                return {
-                    ...prevClient,
-                    [field]: value,
-                };
-            }
-            return null;
-        });
+        setNewClient((prevClient) => ({
+            ...(prevClient || {}),
+            [field]: value
+        }));
     };
 
     const handleAddressChange = (field: keyof AddressInterface, value: string) => {
@@ -42,7 +37,7 @@ const ClientFormDialog: React.FC<ClientFormDialogProps> = ({ open, onClose, clie
                 return {
                     ...prevClient,
                     address: {
-                        ...(prevClient.address || {}),
+                        ...prevClient?.address,
                         [field]: value,
                     },
                 };
@@ -52,7 +47,7 @@ const ClientFormDialog: React.FC<ClientFormDialogProps> = ({ open, onClose, clie
     };
 
     const handleAddClient = (newClient: ClientInterface) => {
-        if (!newClient || !newClient.name || !newClient.email || !newClient.phone || !newClient.website || !newClient.address.street || !newClient.address.area || !newClient.address.city || !newClient.address.state || !newClient.address.country || !newClient.address.zipcode) {
+        if (!newClient || !newClient.name || !newClient.email || !newClient.phone || !newClient.website || !newClient?.address?.street || !newClient?.address?.area || !newClient?.address?.city || !newClient?.address?.state || !newClient?.address?.country || !newClient?.address?.zipcode) {
             setFormError(true);
             return;
         }
@@ -77,7 +72,7 @@ const ClientFormDialog: React.FC<ClientFormDialogProps> = ({ open, onClose, clie
                 <TextField label="(optional email)" style={{ marginTop: '10px' }} value={newClient?.secondemail || ''} onChange={(e) => handleChange('secondemail', e.target.value)} fullWidth />
                 <TextField label="Phone" style={{ marginTop: '10px' }} value={newClient?.phone || ''} onChange={(e) => handleChange('phone', e.target.value)} fullWidth required />
                 <TextField label="Website" style={{ marginTop: '10px' }} value={newClient?.website || ''} onChange={(e) => handleChange('website', e.target.value)} fullWidth required />
-                <TextField label="Street" style={{ marginTop: '10px' }} value={newClient?.address.street || ''} onChange={(e) => handleAddressChange('street', e.target.value)} fullWidth required />
+                <TextField label="Street" style={{ marginTop: '10px' }} value={newClient?.address?.street || ''} onChange={(e) => handleAddressChange('street', e.target.value)} fullWidth required />
                 <TextField label="Area" style={{ marginTop: '10px' }} value={newClient?.address?.area || ''} onChange={(e) => handleAddressChange('area', e.target.value)} fullWidth required />
                 <TextField label="City" style={{ marginTop: '10px' }} value={newClient?.address?.city || ''} onChange={(e) => handleAddressChange('city', e.target.value)} fullWidth required />
                 <TextField label="State" style={{ marginTop: '10px' }} value={newClient?.address?.state || ''} onChange={(e) => handleAddressChange('state', e.target.value)} fullWidth required />
@@ -93,7 +88,7 @@ const ClientFormDialog: React.FC<ClientFormDialogProps> = ({ open, onClose, clie
                         Update Client
                     </Button>
                 ) : (
-                    <Button onClick={() => { if (newClient) handleAddClient(newClient) }} color="primary">
+                    <Button onClick={() => { if (newClient) handleAddClient }} color="primary">
                         Add Client
                     </Button>
                 )}

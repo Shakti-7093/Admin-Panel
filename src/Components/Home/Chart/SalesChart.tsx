@@ -1,4 +1,3 @@
-// import axios from 'axios';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -14,14 +13,6 @@ import {
 } from 'recharts';
 import { fetchProduct } from '../../../Store/functions/Product';
 import { AppDispatch, RootState } from '../../../Store/Store';
-
-// const fetchData = async () => {
-//     const response = await axios.get('http://localhost:3000/products');
-//     console.log(response.data);
-//     return response.data;
-// };
-
-// const data =await fetchData();
 
 
 function SalesChart() {
@@ -52,8 +43,6 @@ function SalesChart() {
                     <Legend />
                     <Area type="monotone" dataKey="price" fill="#8884" stroke="#8884d8" />
                     <Bar dataKey="stock" barSize={20} fill="#8595a4" />
-                    {/* <Line type="monotone" dataKey="rating" stroke="#ff7300" />
-                    <Scatter dataKey="discountPercentage" fill="red" /> */}
                 </ComposedChart>
             </ResponsiveContainer>
         );

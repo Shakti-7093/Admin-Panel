@@ -1,37 +1,26 @@
 {
   "products": [
     {
-      "id": "2",
-      "title": "iPhone X",
-      "description": "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...",
-      "price": "1599",
-      "discountPercentage": 27.94,
-      "rating": 4.44,
-      "stock": 450,
-      "brand": "Apple",
+      "id": "3",
+      "title": "Samsung Galaxy Note 7",
+      "description": "The Samsung Galaxy Note 7 is a recalled and discontinued Android-based phablet designed, developed, produced and marketed by Samsung Electronics. Unveiled on 2 August 2016,[6] it was officially released on 19 August 2016 as a successor to the Galaxy Note 5. It is Samsung's first phone with a USB-C connector, and the last phone in the Galaxy Note series to have a physical home button. Although it is the sixth main device in the Galaxy Note series, Samsung branded its series number as \"7\" instead of \"6\" so consumers would not perceive it as being inferior to the flagship Samsung Galaxy S7, and to prevent confusion about the order of release due to the same release year (2016).  The Galaxy Note 7 is an evolution of the Galaxy Note 5 that inherited hardware components and improvements from the Galaxy S7, including the restoration of expandable storage and IP68 water resistance, and new features such as a dual-sided curved display, support for high-dynamic-range (HDR) color, improvements to the bundled stylus and new software features which utilize it, an iris recognition system, and a USB-C port. Demand for the Galaxy Note 7 upon launch was high, breaking pre-order records in South Korea and causing international releases to be delayed in some markets due to supply shortages. The Galaxy Note 7 received positive reviews from critics, who praised the quality of its construction, its HDR support, as well as its streamlined user interface, although it was criticized for its high price and increasing similarities in overall specifications to the main Galaxy S series of phones.",
+      "price": "2800",
+      "discountPercentage": 32.46,
+      "rating": 1.5,
+      "stock": 264,
+      "brand": "Samsung",
       "category": "Smartphones"
     },
     {
-      "id": "3",
-      "title": "Samsung Universe 9",
-      "description": "Samsung's new variant which goes beyond Galaxy to the Universe",
-      "price": 280,
-      "discountPercentage": 32.46,
-      "rating": 4.09,
-      "stock": 264,
-      "brand": "Samsung",
-      "category": "smartphones"
-    },
-    {
       "id": "4",
-      "title": "OPPOF19",
-      "description": "OPPO F19 is officially announced on April 2021.",
+      "title": "OPPO F17 Pro",
+      "description": "The Oppo F17 Pro is a phone developed by Oppo. It is the latest phone in the Oppo F Series, a range of devices marketed towards consumers looking a mid-range phone. The phone was released in India on September 7, 2020, and later went on the market in other countries by a different name, the Oppo A93. The phone has a single configuration with a price of ₹22990, but there is also a special \"Diwali Edition\" version of the phone, which features a Matte Gold version of the phone, which is boxed along with a 10000mAh power bank and a \"Diwali Exclusive back case cover.\" This special edition sells for ₹23990.",
       "price": 220,
       "discountPercentage": 47.91,
-      "rating": 4.3,
+      "rating": 5,
       "stock": 122,
       "brand": "OPPO",
-      "category": "smartphones"
+      "category": "Smartphones"
     },
     {
       "id": "5",
@@ -39,10 +28,10 @@
       "description": "Huawei’s re-badged P30 Pro New Edition was officially unveiled yesterday in Germany and now the device has made its way to the UK.",
       "price": "700",
       "discountPercentage": "12",
-      "rating": 4.09,
+      "rating": "4.5",
       "stock": "318",
       "brand": "Huawei",
-      "category": "smartphones"
+      "category": "Smartphones"
     },
     {
       "id": "6",
@@ -53,7 +42,7 @@
       "rating": 4.57,
       "stock": "830",
       "brand": "Apple",
-      "category": "laptops"
+      "category": "Laptops"
     },
     {
       "id": "7",
@@ -64,7 +53,7 @@
       "rating": 4.25,
       "stock": 50,
       "brand": "Samsung",
-      "category": "laptops"
+      "category": "Laptops"
     },
     {
       "id": "8",
@@ -75,7 +64,7 @@
       "rating": 4.43,
       "stock": 68,
       "brand": "Microsoft Surface",
-      "category": "laptops"
+      "category": "Laptops"
     },
     {
       "id": "9",
@@ -86,7 +75,7 @@
       "rating": 4.54,
       "stock": 96,
       "brand": "Infinix",
-      "category": "laptops"
+      "category": "Laptops"
     },
     {
       "id": "10",
@@ -97,7 +86,7 @@
       "rating": 4.43,
       "stock": 89,
       "brand": "HP Pavilion",
-      "category": "laptops"
+      "category": "Laptops"
     },
     {
       "id": "11",
@@ -108,7 +97,7 @@
       "rating": 4.26,
       "stock": 65,
       "brand": "Impression of Acqua Di Gio",
-      "category": "fragrances"
+      "category": "Fragrances"
     },
     {
       "id": "12",
@@ -119,7 +108,7 @@
       "rating": 4,
       "stock": 52,
       "brand": "Royal_Mirage",
-      "category": "fragrances"
+      "category": "Fragrances"
     },
     {
       "id": "13",
@@ -130,7 +119,7 @@
       "rating": 4.59,
       "stock": 61,
       "brand": "Fog Scent Xpressio",
-      "category": "fragrances"
+      "category": "Fragrances"
     },
     {
       "id": "14",
@@ -141,7 +130,7 @@
       "rating": 4.21,
       "stock": 114,
       "brand": "Al Munakh",
-      "category": "fragrances"
+      "category": "Fragrances"
     },
     {
       "id": "15",
@@ -152,7 +141,7 @@
       "rating": 4.7,
       "stock": 105,
       "brand": "Lord - Al-Rehab",
-      "category": "fragrances"
+      "category": "Fragrances"
     },
     {
       "id": "16",
@@ -163,7 +152,7 @@
       "rating": 4.83,
       "stock": 110,
       "brand": "L'Oreal Paris",
-      "category": "skincare"
+      "category": "Skincare"
     },
     {
       "id": "17",
@@ -174,7 +163,7 @@
       "rating": 4.52,
       "stock": 78,
       "brand": "Hemani Tea",
-      "category": "skincare"
+      "category": "Skincare"
     },
     {
       "id": "18",
@@ -185,7 +174,7 @@
       "rating": 4.56,
       "stock": 88,
       "brand": "Dermive",
-      "category": "skincare"
+      "category": "Skincare"
     },
     {
       "id": "19",
@@ -196,7 +185,7 @@
       "rating": 4.42,
       "stock": 54,
       "brand": "ROREC White Rice",
-      "category": "skincare"
+      "category": "Skincare"
     },
     {
       "id": "20",
@@ -207,7 +196,7 @@
       "rating": 4.06,
       "stock": 140,
       "brand": "Fair & Clear",
-      "category": "skincare"
+      "category": "Skincare"
     },
     {
       "id": "21",
@@ -218,7 +207,7 @@
       "rating": 4.44,
       "stock": 133,
       "brand": "Saaf & Khaas",
-      "category": "groceries"
+      "category": "Groceries"
     },
     {
       "id": "22",
@@ -229,7 +218,7 @@
       "rating": 4.57,
       "stock": 146,
       "brand": "Bake Parlor Big",
-      "category": "groceries"
+      "category": "Groceries"
     },
     {
       "id": "23",
@@ -240,7 +229,7 @@
       "rating": 4.85,
       "stock": 26,
       "brand": "Baking Food Items",
-      "category": "groceries"
+      "category": "Groceries"
     },
     {
       "id": "24",
@@ -251,7 +240,7 @@
       "rating": 4.94,
       "stock": 113,
       "brand": "fauji",
-      "category": "groceries"
+      "category": "Groceries"
     },
     {
       "id": "25",
@@ -262,7 +251,7 @@
       "rating": 4.87,
       "stock": 47,
       "brand": "Dry Rose",
-      "category": "groceries"
+      "category": "Groceries"
     },
     {
       "id": "26",
@@ -273,7 +262,7 @@
       "rating": 4.08,
       "stock": 131,
       "brand": "Boho Decor",
-      "category": "home-decoration"
+      "category": "Home Decoration"
     },
     {
       "id": "27",
@@ -284,7 +273,7 @@
       "rating": 4.41,
       "stock": 17,
       "brand": "Flying Wooden",
-      "category": "home-decoration"
+      "category": "Home Decoration"
     },
     {
       "id": "28",
@@ -295,7 +284,7 @@
       "rating": 4.82,
       "stock": 54,
       "brand": "LED Lights",
-      "category": "home-decoration"
+      "category": "Home Decoration"
     },
     {
       "id": "29",
@@ -306,7 +295,7 @@
       "rating": 4.44,
       "stock": 7,
       "brand": "luxury palace",
-      "category": "home-decoration"
+      "category": "Home Decoration"
     },
     {
       "id": "30",
@@ -317,7 +306,7 @@
       "rating": 4.92,
       "stock": 54,
       "brand": "Golden",
-      "category": "home-decoration"
+      "category": "Home Decoration"
     },
     {
       "id": "31",
@@ -331,14 +320,14 @@
       "category": "Smartphones"
     },
     {
-      "id": "6f54",
-      "title": "Poco i10",
-      "description": "latest product with new factures.",
-      "price": "1450",
-      "discountPercentage": 10.25,
-      "rating": 4.9,
-      "stock": 258,
-      "brand": "MI",
+      "id": "2",
+      "title": "iPhone X",
+      "description": "The iPhone X (Roman numeral \"X\" pronounced \"ten\") is a smartphone designed, developed and marketed by Apple. It is part of the 11th generation of the iPhone. Available for pre-order from October 27, 2017, it was released on November 3, 2017. The naming of the iPhone X (skipping the iPhone 9 and 9s) is to mark the 10th anniversary of the iPhone.  The iPhone X used a glass and stainless-steel form factor and \"bezel-less\" design, shrinking the bezels while not having a \"chin\", unlike many Android phones. It was the first iPhone to use an OLED screen, branded as a Super Retina HD display. The home button's fingerprint sensor was replaced with a new type of authentication called Face ID, which uses sensors to scan the user's face to unlock the device. This face-recognition capability also enabled emojis to be animated following the user's expression (Animoji). With a bezel-less design, iPhone user interaction changed significantly, using gestures to navigate the operating system rather than the home button used in all previous iPhones. At the time of its November 2017 launch, its price tag of US$999 also made it the most expensive iPhone ever, with even higher prices internationally due to additional local sales and import taxes.  Along with the iPhone 6S, its Plus variant, and the first-generation iPhone SE, the iPhone X was discontinued on September 12, 2018, following the announcement of the iPhone XS, iPhone XS Max and iPhone XR devices.  On November 22, 2018, Apple reportedly resumed production of the iPhone X due to weak sales of its successors. The iPhone X remains discontinued.",
+      "price": "1700",
+      "discountPercentage": "26.94",
+      "rating": 4.44,
+      "stock": 450,
+      "brand": "Apple",
       "category": "Smartphones"
     }
   ],

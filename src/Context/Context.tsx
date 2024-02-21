@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState } from "react";
+import { ProductInterface } from "../Store/Interface/ProductInterface";
 
 interface UserContextProps {
   username: string;
@@ -11,6 +12,10 @@ interface UserContextProps {
   setAddress: React.Dispatch<React.SetStateAction<string>>;
   contact: string;
   setContact: React.Dispatch<React.SetStateAction<string>>;
+  totalProductPrice: number | null;
+  setTotalProductPrice: React.Dispatch<React.SetStateAction<number | null>>;
+  productData: ProductInterface | null;
+  setProductData: React.Dispatch<React.SetStateAction<ProductInterface | null>>;
 }
 
 const Context = createContext<UserContextProps | undefined>(undefined);
@@ -21,6 +26,8 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [image, setImage] = useState<File | null>(null);
   const [address, setAddress] = useState("");
   const [contact, setContact] = useState("");
+  const [totalProductPrice, setTotalProductPrice] = useState<number | null>(null);
+  const [productData, setProductData] = useState<ProductInterface | null>(null);
 
   localStorage.setItem("username", username);
   localStorage.setItem("address", address);
@@ -39,6 +46,10 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setAddress,
         contact,
         setContact,
+        totalProductPrice,
+        setTotalProductPrice,
+        productData,
+        setProductData,
       }}
     >
       {children}

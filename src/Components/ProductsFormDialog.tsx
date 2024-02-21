@@ -18,26 +18,55 @@ const ProductsFormDialog: React.FC<ProductFormDialogProps> = ({ open, onClose, p
   const [editingProduct, setEditingProduct] = useState<ProductInterface | null>(product);
   const [newProduct, setNewProduct] = useState<ProductInterface | null>(null);
   const [formError, setFormError] = useState(false);
+  const [ratingError, setRatingError] = useState(false);
 
   useEffect(() => {
-    setEditingProduct(product);
-    setNewProduct(product ? { ...product } : null);
-  }, [product]);
+    if (product && !editingProduct) {
+      setEditingProduct(product);
+      setNewProduct({ ...product }); // Initialize newProduct with the provided product
+    } else if (!product) {
+      setEditingProduct(null);
+      setNewProduct(null); // Reset newProduct when adding a new product
+    }
+  }, [product, editingProduct]);
+  
+
 
   const handleChange = (field: keyof ProductInterface, value: string) => {
-    setNewProduct((prevProduct) => {
-      if (prevProduct) {
-        return {
-          ...prevProduct,
-          [field]: value,
-        }
+    if(field === 'category'){
+      setNewProduct((prev) => ({
+        ...prev!,
+        [field]: value
+      }));
+    }else if (field === 'rating') {
+      // Parse the value as a float
+      const parsedValue = parseFloat(value);
+      // Check if the parsed value is NaN or greater than 5
+      if (isNaN(parsedValue) || parsedValue > 5) {
+        setRatingError(true);
+      } else {
+        setRatingError(false);
+        setNewProduct((prev) => ({
+          ...prev!,
+          [field]: parsedValue
+        }));
       }
-      return null
-    });
+    } else{
+      setNewProduct((prev) => ({
+        ...prev!,
+        [field]: value
+      }));
+    }
   };
 
-  const handleAddProduct = () => {
-    if (newProduct && newProduct.title && newProduct.description && newProduct.price && newProduct.rating && newProduct.stock && newProduct.brand && newProduct.category && newProduct.discountPercentage) {
+  const handleAddProduct = (newProduct: ProductInterface) => {
+    if (!newProduct.title || !newProduct.description || !newProduct.price || !newProduct.rating || !newProduct.stock || !newProduct.brand || !newProduct.category || !newProduct.discountPercentage) {
+      setFormError(true);
+      setTimeout(() => {
+        setFormError(false);
+      }, 2000);
+      console.log(newProduct)
+    } else {
       dispatch(addProduct(newProduct));
       onClose();
       setFormError(false)
@@ -45,8 +74,7 @@ const ProductsFormDialog: React.FC<ProductFormDialogProps> = ({ open, onClose, p
       setTimeout(() => {
         setAdd(false);
       }, 3000);
-    } else {
-      setFormError(true);
+      console.log(newProduct)
     }
   };
 
@@ -66,6 +94,7 @@ const ProductsFormDialog: React.FC<ProductFormDialogProps> = ({ open, onClose, p
       <DialogTitle>{editingProduct ? 'Edit Product' : 'Add New Product'}</DialogTitle>
       <DialogContent>
         {formError && <Alert severity="error">Please fill out all the required fields</Alert>}
+        {ratingError && <Alert severity="error">The Rating should be upto 5 only</Alert>}
         <TextField label="Title" style={{ marginTop: '5px' }} value={newProduct?.title} onChange={(e) => handleChange('title', e.target.value)} fullWidth required />
         <TextField label="Description" style={{ marginTop: '10px' }} value={newProduct?.description} onChange={(e) => handleChange('description', e.target.value)} fullWidth required />
         <TextField label="Rating" type="number" style={{ marginTop: '10px' }} value={newProduct?.rating} onChange={(e) => handleChange('rating', e.target.value)} fullWidth required />
@@ -74,25 +103,25 @@ const ProductsFormDialog: React.FC<ProductFormDialogProps> = ({ open, onClose, p
         <TextField label="Stock" type="number" style={{ marginTop: '10px' }} value={newProduct?.stock} onChange={(e) => handleChange('stock', e.target.value)} fullWidth required />
         <TextField label="Brand" style={{ marginTop: '10px' }} value={newProduct?.brand} onChange={(e) => handleChange('brand', e.target.value)} fullWidth required />
 
-        <FormControl style={{ marginTop: '10px' }} fullWidth required >
+        <FormControl style={{ marginTop: '10px' }} fullWidth>
           <InputLabel id="category-label">Category</InputLabel>
           <Select
             labelId="category-label"
-            value={newProduct?.category}
-            onChange={(e) => handleChange('category', e.target.value as string)}
+            value={newProduct?.category || 'None'}
+            onChange={(e) => handleChange('category', e.target.value)}
+            required
           >
+            <MenuItem value="None">None</MenuItem>
             <MenuItem value="Clothing">Clothing</MenuItem>
             <MenuItem value="Electronics">Electronics</MenuItem>
             <MenuItem value="Fragrances">Fragrances</MenuItem>
             <MenuItem value="Groceries">Groceries</MenuItem>
             <MenuItem value="Home Decoration">Home Decoration</MenuItem>
             <MenuItem value="Laptops">Laptops</MenuItem>
-            <MenuItem value="Other">Other</MenuItem>
             <MenuItem value="Skincare">Skincare</MenuItem>
             <MenuItem value="Smartphones">Smartphones</MenuItem>
           </Select>
         </FormControl>
-        {newProduct && newProduct.category === 'Other' && (<TextField label="Other Category" style={{ marginTop: '10px' }} value={newProduct?.other} onChange={(e) => handleChange('other', e.target.value)} fullWidth required />)}
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose} color="primary">
@@ -103,7 +132,7 @@ const ProductsFormDialog: React.FC<ProductFormDialogProps> = ({ open, onClose, p
             Update Product
           </Button>
         ) : (
-          <Button onClick={handleAddProduct} color="primary">
+          <Button onClick={() => { if (newProduct) handleAddProduct(newProduct) }} color="primary">
             Add Product
           </Button>
         )}

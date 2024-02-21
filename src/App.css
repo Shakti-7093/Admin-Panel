@@ -57,6 +57,34 @@
   margin-left: 0px;
 }
 
+.dialog-text-color {
+  color: #4e4e4e;
+}
+
+.product-details {
+  margin-bottom: 10px;
+}
+
+.product-details-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 60px;
+  margin-bottom: 50px;
+}
+
+.product-description {
+  width: 70%;
+  margin-left: 15%;
+  border: 1px solid #ccc;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  border-radius: 15px;
+  justify-content: center;
+  align-items: center;
+}
+
 @media screen and (max-width: 768px) {
   .container {
     margin-left: 60px;
@@ -70,6 +98,10 @@
 
   .add-button {
     margin-right: -70px;
+  }
+
+  .add-button-second {
+    margin-right: 0px;
   }
 
   .grid-border-box,
